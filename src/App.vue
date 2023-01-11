@@ -11,7 +11,12 @@
           <SearchInput @onSearch="onSearch" />
           <FilterButtons @onFilterButton="onFilterButton" />
         </MyBox>
-        <MovieList />
+        <MovieList
+          :movies="movies"
+          @onLike="onLikeApp"
+          @onFavourite="onFavouriteApp"
+          @onRemove="onRemoveApp"
+        />
         <MovieAddForm @onSubmit="onSubmit" />
       </div>
     </div>
@@ -85,6 +90,15 @@ export default {
     };
   },
   methods: {
+    onLikeApp(par) {
+      console.log("onLikeApp => ", par);
+    },
+    onFavouriteApp(par) {
+      console.log("onFavourite => ", par);
+    },
+    onRemoveApp(par) {
+      console.log("onRemove => ", par);
+    },
     onSearch(param) {
       this.filterWord = param;
     },

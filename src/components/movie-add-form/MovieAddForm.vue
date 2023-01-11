@@ -48,4 +48,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.movie-add-form__title {
+    margin-bottom: 1rem;
+}
+</style>
