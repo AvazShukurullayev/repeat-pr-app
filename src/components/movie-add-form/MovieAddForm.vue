@@ -1,16 +1,20 @@
 <template>
   <MyBox class="movie-add-form">
     <h2 class="movie-add-form__title">Kino qo'shish</h2>
-    <form @onSubmit="onSubmit" class="d-flex">
+    <form @submit.prevent="onSubmitForm" class="d-flex">
       <input
         type="text"
         class="form-control"
         placeholder="Kinoni nomini kiriting"
+        v-model="form.title"
+        required
       />
       <input
         type="number"
         class="form-control"
         placeholder="Kinoni necha marotaba ko'rilgan"
+        v-model="form.viewers"
+        required
       />
       <button class="btn btn-outline-dark" type="submit">Qo'shish</button>
     </form>
@@ -24,9 +28,24 @@ export default {
   props: [],
   components: { MyBox },
   data() {
-    return {};
+    return {
+      form: {},
+    };
   },
-  methods: {},
+  methods: {
+    onSubmitForm() {
+      const newMovieItem = {
+        title: this.form.title,
+        viewers: this.form.viewers,
+        favourite: false,
+        like: false,
+        id: Date.now(),
+          };
+      console.log("new Movie Item => ", newMovieItem);
+      this.$emit("onSubmit", newMovieItem);
+      this.form = {};
+    },
+  },
 };
 </script>
 

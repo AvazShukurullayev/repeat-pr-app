@@ -8,11 +8,11 @@
           :likedMoviesLength="movies.filter((c) => c.like).length"
         />
         <MyBox class="search-panel">
-          <SearchInput />
+          <SearchInput @onSearch="onSearch" />
           <FilterButtons />
         </MyBox>
-        <MovieList  />
-        <MovieAddForm />
+        <MovieList />
+        <MovieAddForm @onSubmit="onSubmit"/>
       </div>
     </div>
   </div>
@@ -81,9 +81,17 @@ export default {
           id: 6,
         },
       ],
+      filterWord: "",
     };
   },
-  methods: {},
+  methods: {
+    onSearch(param) {
+      console.log("onFilter param => ", param);
+    },
+    onSubmit(param) {
+      console.log("onSubmit param => ", param);
+    }
+  },
 };
 </script>
 
