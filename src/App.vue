@@ -4,8 +4,10 @@
       <div class="content">
         <AppInfo
           :moviesLength="movies.length"
-          :favouriteMoviesLength="movies.filter((c) => c.favourite).length"
-          :likedMoviesLength="movies.filter((c) => c.like).length"
+          :favouriteMoviesLength="
+            movies.filter((element) => element.favourite).length
+          "
+          :likedMoviesLength="movies.filter((element) => element.like).length"
         />
         <MyBox class="search-panel">
           <SearchInput @onSearch="onSearch" />
@@ -90,21 +92,29 @@ export default {
     };
   },
   methods: {
-    onLikeApp(par) {
-      console.log("onLikeApp => ", par);
+    onLikeApp(id) {
+      this.movies = this.movies.map((element) => {
+        if (element.id === id) {
+          element.like = !element.like;
+        }
+        return element;
+      });
     },
-    onFavouriteApp(par) {
-      console.log("onFavourite => ", par);
+    onFavouriteApp(id) {
+      this.movies = this.movies.map((element) => {
+        if (element.id === id) {
+          element.favourite = !element.favourite;
+        }
+        return element;
+      });
     },
-    onRemoveApp(par) {
-      console.log("onRemove => ", par);
+    onRemoveApp(id) {
+      this.movies = this.movies.filter((element) => element.id !== id);
     },
-    onSearch(param) {
-      this.filterWord = param;
+    onSearch(par) {
+      this.filterWord = par;
     },
-    onFilterButton(param) {
-      console.log("on Filter button => ", param);
-    },
+    onFilterButton(par) {},
     onSubmit(param) {
       this.movies.push(param);
     },
