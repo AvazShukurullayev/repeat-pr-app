@@ -1,5 +1,5 @@
 <template>
-  <input type="text" class="form-control" />
+  <input type="text" class="form-control search-input" />
 </template>
 
 <script>
@@ -9,4 +9,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.search-input {
+
+}
+</style>
