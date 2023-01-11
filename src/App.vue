@@ -14,7 +14,12 @@
           <FilterButtons @onFilterButton="onFilterButton" />
         </MyBox>
         <MovieList
-          :movies="onSearchMovies(movies, filterWord)"
+          :movies="
+            onFilterButtonMovies(
+              onSearchMovies(movies, filterWord),
+              filterButton
+            )
+          "
           @onLike="onLikeApp"
           @onFavourite="onFavouriteApp"
           @onRemove="onRemoveApp"
@@ -89,9 +94,20 @@ export default {
         },
       ],
       filterWord: "",
+      filterButton: "all",
     };
   },
   methods: {
+    onFilterButtonMovies(arr, filterButton) {
+      switch (filterButton) {
+        case "popular":
+          return arr.filter((element) => element.favourite);
+        case "mostViewers":
+          return arr.filter((element) => element.viewers > 500);
+        default:
+          return arr;
+      }
+    },
     onSearchMovies(arr, filterWord) {
       if (filterWord.length == 0) {
         return arr;
@@ -122,7 +138,9 @@ export default {
     onSearch(par) {
       this.filterWord = par;
     },
-    onFilterButton(par) {},
+    onFilterButton(par) {
+      this.filterButton = par;
+    },
     onSubmit(param) {
       this.movies.push(param);
     },
