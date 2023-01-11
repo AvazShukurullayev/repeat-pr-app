@@ -14,7 +14,7 @@
           <FilterButtons @onFilterButton="onFilterButton" />
         </MyBox>
         <MovieList
-          :movies="movies"
+          :movies="onSearchMovies(movies, filterWord)"
           @onLike="onLikeApp"
           @onFavourite="onFavouriteApp"
           @onRemove="onRemoveApp"
@@ -92,6 +92,14 @@ export default {
     };
   },
   methods: {
+    onSearchMovies(arr, filterWord) {
+      if (filterWord.length == 0) {
+        return arr;
+      }
+      return arr.filter((element) =>
+        element.title.toLowerCase().includes(filterWord.toLowerCase())
+      );
+    },
     onLikeApp(id) {
       this.movies = this.movies.map((element) => {
         if (element.id === id) {
