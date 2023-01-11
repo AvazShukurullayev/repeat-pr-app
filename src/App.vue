@@ -11,7 +11,7 @@
           <SearchInput />
           <FilterButtons />
         </MyBox>
-        <MovieList />
+        <MovieList  />
         <MovieAddForm />
       </div>
     </div>
