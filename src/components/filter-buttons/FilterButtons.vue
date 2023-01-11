@@ -1,20 +1,51 @@
 <template>
   <div class="btn-group">
-    <button class="btn btn-dark">Barcha kinolar</button>
-    <button class="btn btn-outline-dark">Mashxur kinolar</button>
-    <button class="btn btn-outline-dark">Eng ko'p ko'rilgan kinolar</button>
+    <MyButton
+      v-for="filterBtn in filterButtons"
+      @click="filterButton(filterBtn.btnValue)"
+      :key="filterBtn.btnTitle"
+      :class="[
+        filterBtn.btnValue == filterButtonValue
+          ? 'btn-dark'
+          : 'btn-outline-dark',
+      ]"
+    >
+      {{ filterBtn.btnTitle }}
+    </MyButton>
   </div>
 </template>
 
 <script>
+import MyButton from "@/components/ui-components/MyButton.vue";
 export default {
   name: "FilterButtons",
   props: [],
-  components: {},
+  components: { MyButton },
   data() {
-    return {};
+    return {
+      filterButtons: [
+        {
+          btnTitle: "Barcha kinolar",
+          btnValue: "all",
+        },
+        {
+          btnTitle: "Mashxur kinolar",
+          btnValue: "popular",
+        },
+        {
+          btnTitle: "Eng ko'p ko'rilgan kinolar",
+          btnValue: "mostViewers",
+        },
+      ],
+      filterButtonValue: "all",
+    };
   },
-  methods: {},
+  methods: {
+    filterButton(par) {
+      this.filterButtonValue = par;
+      this.$emit("onFilterButton", this.filterButtonValue);
+    },
+  },
 };
 </script>
 

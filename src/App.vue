@@ -9,10 +9,10 @@
         />
         <MyBox class="search-panel">
           <SearchInput @onSearch="onSearch" />
-          <FilterButtons />
+          <FilterButtons @onFilterButton="onFilterButton" />
         </MyBox>
         <MovieList />
-        <MovieAddForm @onSubmit="onSubmit"/>
+        <MovieAddForm @onSubmit="onSubmit" />
       </div>
     </div>
   </div>
@@ -86,11 +86,14 @@ export default {
   },
   methods: {
     onSearch(param) {
-      console.log("onFilter param => ", param);
+      this.filterWord = param;
+    },
+    onFilterButton(param) {
+      console.log("on Filter button => ", param);
     },
     onSubmit(param) {
-      console.log("onSubmit param => ", param);
-    }
+      this.movies.push(param);
+    },
   },
 };
 </script>

@@ -40,8 +40,7 @@ export default {
         favourite: false,
         like: false,
         id: Date.now(),
-          };
-      console.log("new Movie Item => ", newMovieItem);
+      };
       this.$emit("onSubmit", newMovieItem);
       this.form = {};
     },
